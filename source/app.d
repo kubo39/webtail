@@ -4,6 +4,7 @@ import vibe.http.router : URLRouter;
 import vibe.http.server;
 import vibe.web.web;
 import vibe.http.websockets : WebSocket, handleWebSockets;
+import vibe.http.fileserver : serveStaticFiles;
 
 import std.stdio;
 import std.file;
@@ -20,12 +21,11 @@ public:
     this(string filename)
     {
         file = File(filename);
-        file.seek(0, SEEK_END);
     }
 
     string readline()
     {
-        return file.readln();
+        return file.readln;
     }
 }
 
@@ -51,7 +51,7 @@ public:
         {
             sleep(1.seconds);
             if (!socket.connected) break;
-            socket.send(logProtocol.readline.replace("\n", "<br>"));
+            socket.send(logProtocol.readline);
         }
     }
 }
@@ -59,8 +59,8 @@ public:
 shared static this()
 {
     auto router = new URLRouter;
-    router.registerWebInterface(new Webtail("/var/log/messages"));
-    // router.get("/", staticRedirect("/index.html"));
+    router.registerWebInterface(new Webtail("/var/log/system.log"));
+    router.get("*", serveStaticFiles("public/"));
 
     auto settings = new HTTPServerSettings;
     settings.port = 8080;

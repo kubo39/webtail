@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    style.
+      body {
+      font-family: sans-serif;
+      background-color: black;
+      font-family: courier;
+      font-size: 12px;
+      color: green;
+      }
+  body
+    div#console(class='')
+    script.
+      var source = new WebSocket('/live');
+      source.onmessage = function(m) {
+      document.getElementById("console").innerHTML += m.data;
+      window.scrollBy(0, 50);
+      }

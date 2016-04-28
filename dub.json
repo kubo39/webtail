@@ -1,0 +1,11 @@
+{
+	"name": "webtail",
+	"authors": [
+		"kubo39"
+	],
+	"dependencies": {
+		"vibe-d": "~>0.7.28"
+	},
+	"description": "A minimal D application.",
+    "versions": ["VibeDefaultMain"]
+}

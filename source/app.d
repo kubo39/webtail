@@ -11,6 +11,16 @@ import std.file;
 import std.string;
 import core.time;
 
+version(linux)
+{
+    enum syslog = "/var/log/syslog";
+}
+else version(OSX)
+{
+    enum syslog = "/var/log/system.log";
+}
+else static assert("Unsupported.");
+
 
 class LogProtocol
 {
@@ -59,7 +69,7 @@ public:
 shared static this()
 {
     auto router = new URLRouter;
-    router.registerWebInterface(new Webtail("/var/log/system.log"));
+    router.registerWebInterface(new Webtail(syslog));
     router.get("*", serveStaticFiles("public/"));
 
     auto settings = new HTTPServerSettings;

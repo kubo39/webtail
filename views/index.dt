@@ -1,14 +1,7 @@
 doctype html
 html
   head
-    style.
-      body {
-      font-family: sans-serif;
-      background-color: black;
-      font-family: courier;
-      font-size: 12px;
-      color: green;
-      }
+    link(rel='stylesheet', href='/styles/webtail.css')
   body
     div#console(class='')
     script(type='text/javascript', src='/scripts/websocket.js')
